@@ -1,6 +1,9 @@
 import telebot
 import config
 from telebot import types
+import api
+import parser
+import re
 
 TOKEN = config.BOT_API
 
@@ -49,6 +52,10 @@ def send_welcome(message):
 
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
-	bot.reply_to(message, message.text)
-	
+	res = api.search(deEmojify(message.text))
+	arr = parser.getVacancies(res)
+	for x in range(0,len(arr)):
+		bot.send_message(message.chat.id, arr[x])
+		pass
+
 bot.polling()
