@@ -44,6 +44,8 @@ def send_welcome(message):
 	markup = types.ReplyKeyboardMarkup()
 	search = types.KeyboardButton('Поиск 🔍')
 	markup.row(search)
+	markup.row(types.KeyboardButton('Создать резюме 📄'))
+	markup.row(types.KeyboardButton('ЦССТ СКФУ ✅'))
 	for x in range(0,len(categorys)):
 		item = types.KeyboardButton(categorys[x])
 		markup.row(item)
@@ -52,10 +54,15 @@ def send_welcome(message):
 
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
-	res = api.search(deEmojify(message.text))
-	arr = parser.getVacancies(res)
-	for x in range(0,len(arr)):
-		bot.send_message(message.chat.id, arr[x])
-		pass
+	if message.text == "Создать резюме 📄":
+		bot.send_message(message.chat.id, "Создание резюме – важнейший шаг в процессе поиска работы. Это твоя визитная карточка! От того, насколько грамотно оно будет составлено, во многом зависят твои шансы на получение желаемой должности. \n📄 Упростим задачу, всё что тебе необходимо, это перейти по ссылке и заполнить информацию о себе.\nhttps://docs.google.com/forms/d/e/1FAIpQLSd_P7B5YqJf53deCQvsE2hUAs-kLpXkNYs5rCKFZkiUlUeb-g/viewform")
+	elif message.text == "ЦССТ СКФУ ✅":
+		bot.send_message(message.chat.id, "@WorkNCFU_bot")
+	else:
+		res = api.search(deEmojify(message.text))
+		arr = parser.getVacancies(res)
+		for x in range(0,len(arr)):
+			bot.send_message(message.chat.id, arr[x])
+			pass
 
 bot.polling()

@@ -29,7 +29,7 @@ def getVacancies(arr):
 			pass
 		url = arr["items"][x]["url"]
 		try:
-			res_str = "📌"+name+"\n🏢Компания: "+company+"\n‼️Требования: "+requirement+"\n💸Зарплата: "+salary+"\n🗓График работы: "+schedule+"\n"+"🔗Подробнее: "+url
+			res_str = "📌"+name+"\n\n🏢Компания: "+company+"\n\n‼️Требования: "+requirement+"\n\n💸Зарплата: "+salary+"\n\n🗓График работы: "+schedule+"\n\n"+"🔗Подробнее: "+url
 			res.append(res_str)
 			pass
 		except Exception as e:
